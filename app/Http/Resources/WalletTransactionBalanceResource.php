@@ -7,7 +7,7 @@ use App\Models\Wallet;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 
-class WalletBalanceResource extends BaseResource
+class WalletTransactionBalanceResource extends BaseResource
 {
     /**
      * Transform the resource into an array.
@@ -19,7 +19,7 @@ class WalletBalanceResource extends BaseResource
     {
 
         return [
-            'balance' => $this->balance,
+            'balance' => $this->getBalnce(),
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\WalletAddFundAPIRequest;
 use App\Http\Requests\API\WalletTransferAPIRequest;
-use App\Http\Resources\WalletBalanceResource;
+use App\Http\Resources\WalletTransactionBalanceResource;
 use App\Services\WalletService;
 use Exception;
 use App\Http\Controllers\ApiBaseController;
@@ -35,7 +35,7 @@ class WalletTransactionController extends ApiBaseController
         }
 
         return $this->sendResponse(
-            array(new WalletBalanceResource($wallet) ),
+            array(new WalletTransactionBalanceResource($wallet) ),
             "funds added successfully",true
         );
 
@@ -54,7 +54,7 @@ class WalletTransactionController extends ApiBaseController
         }
 
         return $this->sendResponse(
-            array(new WalletBalanceResource($wallet) ),
+            array(new WalletTransactionBalanceResource($wallet) ),
             "funds added successfully",true
         );
     }

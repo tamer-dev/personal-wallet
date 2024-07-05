@@ -17,4 +17,12 @@ class WalletTransaction extends Model
         'sender_id',
         'recipient_id'
     ];
+
+    public function wallet()
+    {
+        return $this->belongsTo(Wallet::class);
+    }
+    function getBalnce(){
+        return $this->wallet()->balance;
+    }
 }
