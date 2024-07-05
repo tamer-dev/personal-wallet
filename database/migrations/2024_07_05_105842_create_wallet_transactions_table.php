@@ -17,9 +17,7 @@ return new class extends Migration
             $table->string('to_bank_account')->nullable();
             $table->decimal('amount', 18, 2);
             $table->string('type');//"deposit", "transfer", "withdrawal", "fee" etc
-            $table->string('reference_id')->nullable();//(optional) for linking related transactions (e.g., transfer ID)
-            $table->foreignId('sender_id')->nullable()->constrained("users");
-            $table->foreignId('recipient_id')->nullable()->constrained("users");
+            $table->integer('reference_id')->nullable()->constrained("wallet_transactions");//(optional) for linking related transactions (e.g., transfer ID)
             $table->integer('status');
             $table->dateTime('transaction_date');
             $table->timestamps();

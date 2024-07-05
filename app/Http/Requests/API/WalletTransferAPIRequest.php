@@ -23,8 +23,8 @@ class WalletTransferAPIRequest extends APIRequest {
      */
     public function rules() {
         return [
-            'sender_id'  => 'required|exists:users,id|exists:wallets',
-            'recipient_id'  => 'required|exists:users,id|exists:wallets',
+            'sender_id'  => 'required|exists:users,id|exists:wallets,user_id',
+            'recipient_id'  => 'required|exists:users,id|exists:wallets,user_id',
             'amount' => 'required',
         ];
     }

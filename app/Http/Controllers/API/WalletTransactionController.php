@@ -27,17 +27,25 @@ class WalletTransactionController extends ApiBaseController
     {
         try {
             DB::beginTransaction();
-            $wallet =$this->walletService->addFunds($request);
+            $walletTransaction =$this->walletService->addFunds($request);
             DB::commit();
         } catch (Exception $exception) {
             DB::rollBack();
             return $this->sendError($exception->getMessage());
         }
 
-        return $this->sendResponse(
-            array(new WalletTransactionBalanceResource($wallet) ),
-            "funds added successfully",true
-        );
+        return response()->json([
+            'success' => true,
+            'message' => 'Funds added successfully',
+            'new_balance' => $walletTransaction->wallet()->first()->balance
+        ]);
+
+        //Another way to return data by Resource and global sendResponse function
+
+        // return $this->sendResponse(
+        //    new WalletTransactionBalanceResource($walletTransaction) ,
+        //    "funds added successfully"
+        // );
 
     }
 
@@ -46,17 +54,18 @@ class WalletTransactionController extends ApiBaseController
     {
         try {
             DB::beginTransaction();
-            $wallet =$this->walletService->transferFunds($request);
+            $walletTransaction =$this->walletService->transferFunds($request);
             DB::commit();
         } catch (Exception $exception) {
             DB::rollBack();
             return $this->sendError($exception->getMessage());
         }
 
-        return $this->sendResponse(
-            array(new WalletTransactionBalanceResource($wallet) ),
-            "funds added successfully",true
-        );
+        return response()->json([
+            'success' => true,
+            'message' => 'amount transferred successfully',
+            'new_balance' => $walletTransaction->wallet()->first()->balance
+        ]);
     }
 
     // View transaction history

@@ -14,15 +14,11 @@ class WalletTransaction extends Model
         'amount',
         'status',
         'transaction_date',
-        'sender_id',
-        'recipient_id'
+        'reference_id'
     ];
 
     public function wallet()
     {
         return $this->belongsTo(Wallet::class);
-    }
-    function getBalnce(){
-        return $this->wallet()->balance;
     }
 }

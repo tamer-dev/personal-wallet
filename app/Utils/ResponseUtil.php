@@ -2,7 +2,7 @@
 namespace App\Utils;
 
 
-class ResponseUtil 
+class ResponseUtil
 {
     /**
      * @param string $message

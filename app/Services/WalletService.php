@@ -22,39 +22,13 @@ class WalletService
     }
     function transferFunds($request)
     {
-        $withdrawalTransaction = $this->withdrawal($request->recipient_id,$request);
-        $deposetTransaction = $this->deposit($request->recipient_id,$request);
-//        $wallet = Wallet::where('user_id', $request->sender_id)->first();
-//        $transaction = new WalletTransaction([
-//            'wallet_id' => $wallet->id,
-//            'type' => TransactionTypeEnum::withdrawal,
-//            'amount' => $request->amount,
-//            'sender_id'=> $request->sender_id,
-//            'recipient_id'=> $request->recipient_id,
-//            'status' => TransactionsStatusEnum::completed,
-//            'transaction_date'=>Carbon::now(),
-//            'payment_method'=>$request->enum('payment_method', PaymentMethodsTypeEnum::class)
-//        ]);
-//        $transaction->save();
-//
-//        $wallet = Wallet::where('user_id', $request->recipient_id)->first();
-//
-//        $transaction = new WalletTransaction([
-//            'wallet_id' => $wallet->id,
-//            'type' => TransactionTypeEnum::deposit->value,
-//            'amount' => $request->amount,
-//            'sender_id'=> $request->sender_id,
-//            'recipient_id'=> $request->recipient_id,
-//            'status' => TransactionsStatusEnum::completed,
-//            'transaction_date'=>Carbon::now(),
-//            'payment_method'=>$request->enum('payment_method', PaymentMethodsTypeEnum::class)
-//        ]);
-//        $transaction->save();
+        $withdrawalTransaction = $this->withdrawal($request->sender_id,$request);
+        $deposetTransaction = $this->deposit($request->recipient_id,$request, $withdrawalTransaction->id);
 
         return $withdrawalTransaction;
     }
 
-    function deposit($wallet_user_id,$request,$reference_id=""){
+    function deposit($wallet_user_id,$request,$reference_id=null){
 
         $wallet = Wallet::where('user_id', $wallet_user_id)->first();
         $transaction = new WalletTransaction([
@@ -67,7 +41,7 @@ class WalletService
             'reference_id'=>$reference_id
         ]);
         $transaction->save();
-        return $wallet;
+        return $transaction;
     }
 
     function withdrawal($wallet_user_id,$request){
