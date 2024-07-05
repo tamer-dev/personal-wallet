@@ -56,4 +56,9 @@ class WalletService
         $transaction->save();
         return $transaction;
     }
+
+    function viewTransactions($wallet_user_id){
+        $wallet = Wallet::where('user_id', $wallet_user_id)->first();
+        return WalletTransaction::where('wallet_id', $wallet->id)->get();
+    }
 }

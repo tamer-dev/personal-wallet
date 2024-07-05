@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\WalletAddFundAPIRequest;
 use App\Http\Requests\API\WalletTransferAPIRequest;
 use App\Http\Resources\WalletTransactionBalanceResource;
+use App\Http\Resources\WalletTransactionResource;
 use App\Services\WalletService;
 use Exception;
 use App\Http\Controllers\ApiBaseController;
@@ -71,9 +72,12 @@ class WalletTransactionController extends ApiBaseController
     // View transaction history
     public function viewTransactions(Request $request)
     {
-        $transactions = WalletTransaction::where('wallet_id', $request->wallet_id)->get();
-        //        WalletBalanceResource::collection($wallet);
-        return response()->json($transactions);
+        return response()->json([
+            'success' => true,
+            'message' => 'Transactions retrieved successfully',
+            'transactions' => WalletTransactionResource::collection($this->walletService->viewTransactions($request->user_id))
+        ]);
+
     }
 
     // Withdraw funds to bank account
