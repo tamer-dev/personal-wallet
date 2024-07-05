@@ -1,6 +1,3 @@
-Sure! Here's a draft of the README file for your Laravel project repository:
-
----
 
 # Personal Wallet
 
@@ -83,8 +80,11 @@ This is a Laravel-based wallet application that provides functionalities for man
 - **Generate PDFs**: Use the endpoint `/api/v1/wallet/transactions/pdf` to generate a PDF of your transactions.
 - **Generate QR Code**: Use the endpoint `/api/v1/wallet/transfer/qr-code` to generate a QR code for easy transfers.
 
-## API Documentation
+## ERD Diagram
 
+![img.png](img.png)
+
+## API Documentation
 Detailed API documentation can be found in the `docs` directory or at [API Documentation](./docs/api-documentation.md).
 
 
