@@ -70,7 +70,16 @@ This is a Laravel-based wallet application that provides functionalities for man
     php artisan serve
     ```
 
+9. Allow write permission {QR & PDF folders inside public}:
 
+    ```bash
+    chmod 0755 -R public/qr && chmod 0755 -R public/pdf 
+    ```
+   
+#### also the project support installation by docker:
+
+run "docker compose up - d"
+    
 ## Usage
 
 - **Add Funds**: Use the endpoint `/api/v1/wallet/add-funds` to add funds to your wallet.

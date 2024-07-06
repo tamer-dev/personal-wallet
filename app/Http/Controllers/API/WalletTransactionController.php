@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Requests\API\QrcodeAPIRequest;
 use App\Http\Requests\API\WalletAddFundAPIRequest;
 use App\Http\Requests\API\WalletTransferAPIRequest;
-use App\Http\Resources\WalletTransactionBalanceResource;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Resources\WalletTransactionResource;
 use App\Services\WalletService;
 use Exception;
@@ -87,14 +89,21 @@ class WalletTransactionController extends ApiBaseController
     }
 
     // Generate PDF of transactions
-    public function generatePdf(Request $request)
+    public function generatePdf($user_id)
     {
-        // Logic to generate PDF using DomPDF
+        $transactions = WalletTransaction::whereRelation('wallet', 'user_id', $user_id)->latest()->get();
+        $file_name = 'pdf/'.time().'.pdf';
+        Pdf::loadView('transactions', [
+            'transactions' => $transactions
+        ])->save($file_name);
+        return url($file_name);
     }
 
     // Generate QR code for transfers
-    public function generateQrCode(Request $request)
+    public function generateQrCode($recipient_id, QrcodeAPIRequest $request)
     {
-        // Logic to generate QR code
+        $file_name = 'qr/'.time().'.svg';
+        QrCode::format('svg')->generate("user_id:".$request->get('user_id').", recipient_id:".$recipient_id. ', amount:' . $request->get('amount'),$file_name , 'image/svg');
+        return url($file_name);
     }
 }

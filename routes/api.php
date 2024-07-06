@@ -21,7 +21,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::post('transfer', [WalletTransactionController::class, 'transferFunds']);
         Route::get('transactions', [WalletTransactionController::class, 'viewTransactions']);
         Route::post('withdraw', [WalletTransactionController::class, 'withdrawFunds']);
-        Route::get('transactions/pdf', [WalletTransactionController::class, 'generatePdf']);
-        Route::get('transfer/qr', [WalletTransactionController::class, 'generateQrCode']);
+        Route::get('transactions/pdf/{user_id}', [WalletTransactionController::class, 'generatePdf']);
+        Route::get('transfer/qr/{recipient_id}', [WalletTransactionController::class, 'generateQrCode']);
     });
 });
