@@ -2,30 +2,6 @@
 
 ## Authentication
 
-### Register
-
-**Endpoint**: `POST /api/register`
-
-**Request Body**:
-```json
-{
-    "name": "string",
-    "email": "string",
-    "password": "string",
-    "password_confirmation": "string"
-}
-```
-
-**Response**:
-```json
-{
-    "success": true,
-    "message": "User registered successfully",
-    "data": {
-        "token": "string"
-    }
-}
-```
 
 ### Login
 
@@ -44,7 +20,7 @@
 {
     "success": true,
     "message": "User logged in successfully",
-    "data": {
+    "authorisation": {
         "token": "string"
     }
 }
@@ -64,7 +40,9 @@ Authorization: Bearer {token}
 **Request Body**:
 ```json
 {
-    "amount": "number"
+    "user_id": "int",
+    "amount": "decimal",
+    "payment_method": "string"
 }
 ```
 
@@ -73,9 +51,7 @@ Authorization: Bearer {token}
 {
     "success": true,
     "message": "Funds added successfully",
-    "data": {
-        "balance": "number"
-    }
+    "new_balance": "decimal"
 }
 ```
 
@@ -91,8 +67,9 @@ Authorization: Bearer {token}
 **Request Body**:
 ```json
 {
-    "recipient_id": "number",
-    "amount": "number"
+    "recipient_id": "int",
+    "sender_id": "int",
+    "amount": "decimal"
 }
 ```
 
@@ -100,7 +77,8 @@ Authorization: Bearer {token}
 ```json
 {
     "success": true,
-    "message": "Funds transferred successfully"
+    "message": "Funds transferred successfully",
+    "new_balance": "decimal"
 }
 ```
 
@@ -117,7 +95,7 @@ Authorization: Bearer {token}
 ```json
 {
     "success": true,
-    "data": [
+    "transactions": [
         {
             "id": "number",
             "type": "string",
@@ -149,9 +127,7 @@ Authorization: Bearer {token}
 {
     "success": true,
     "message": "Funds withdrawn successfully",
-    "data": {
-        "balance": "number"
-    }
+    "new_balance": "decimal"
 }
 ```
 

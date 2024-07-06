@@ -25,13 +25,14 @@ class AuthController extends Controller
         $token = Auth::attempt($credentials);
         if (!$token) {
             return response()->json([
-                'status' => 'error',
+                'success' => 'false',
                 'message' => 'Unauthorized',
             ], 401);
         }
 
         return response()->json([
-            'status' => 'success',
+            'success' => 'true',
+            'message' => 'User logged in successfully',
             'authorisation' => [
                 'token' => $token,
                 'type' => 'bearer',
@@ -55,7 +56,7 @@ class AuthController extends Controller
 
         $token = Auth::login($user);
         return response()->json([
-            'status' => 'success',
+            'success' => 'true',
             'message' => 'User created successfully',
             'authorisation' => [
                 'token' => $token,
