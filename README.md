@@ -85,6 +85,6 @@ This is a Laravel-based wallet application that provides functionalities for man
 ![img.png](img.png)
 
 ## API Documentation
-Detailed API documentation can be found in the `docs` directory or at [API Documentation](./docs/api-documentation.md).
+Detailed API documentation can be found in the `docs` directory or at [API Documentation](./docs/Wallet_API.postman_collection-last.json).
 
-
+Postman Collection at [Postman collection](./docs/api-documentation.md).
